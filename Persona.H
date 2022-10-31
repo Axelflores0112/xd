@@ -84,46 +84,52 @@ Game::Game(int _eleccion) {
 void Game::jugar() {
 	Music zelda;
 	zelda.openFromFile("sounds/zelda 1.ogg");
-	zelda.setVolume(20);
+	zelda.setVolume(10);
 	Music zelda2;
 	zelda2.openFromFile("sounds/zelda 1.ogg");
-	zelda2.setVolume(20);
+	zelda2.setVolume(10);
 	Music zelda3;
 	zelda3.openFromFile("sounds/zelda 1.ogg");
-	zelda3.setVolume(20);
+	zelda3.setVolume(10);
 	Music zelda4;
 	zelda4.openFromFile("sounds/zelda 1.ogg");
-	zelda4.setVolume(20);
-	Music ff7;
-	ff7.openFromFile("sounds/MT.ogg");
-	ff7.setVolume(35);
+	zelda4.setVolume(10);
+	Music opening;
+	opening.openFromFile("sounds/opening.ogg");
+	opening.setVolume(20);
 	Music menosp;
 	menosp.openFromFile("sounds/BE.ogg");
-	menosp.setVolume(35);
+	menosp.setVolume(25);
 	Music goode;
 	goode.openFromFile("sounds/BP.ogg");
-	goode.setVolume(35);
+	goode.setVolume(25);
 	Music bonusp;
 	bonusp.openFromFile("sounds/GE.ogg");
-	bonusp.setVolume(35);
+	bonusp.setVolume(25);
 	Music bad;
 	bad.openFromFile("sounds/bad.ogg");
-	bad.setVolume(35);
+	bad.setVolume(25);
 	Music error;
 	error.openFromFile("sounds/error.ogg");
-	error.setVolume(35);
+	error.setVolume(25);
 	Music error2;
 	error2.openFromFile("sounds/error.ogg");
-	error2.setVolume(35);
+	error2.setVolume(25);
 	Music error3;
 	error3.openFromFile("sounds/error.ogg");
-	error3.setVolume(35);
+	error3.setVolume(25);
 	Music error4;
 	error4.openFromFile("sounds/error.ogg");
-	error4.setVolume(35);
+	error4.setVolume(25);
+	Music niveles;
+	niveles.openFromFile("sounds/niveles.ogg");
+	niveles.setVolume(40);
+	Music nivel4;
+	nivel4.openFromFile("sounds/nivel 4.ogg");
+	nivel4.setVolume(20);
 	int score = 0;
 	string N1, N2, N3, N4, N5,N4p,user;
-	ff7.play();
+	opening.play();
 	cout << "PAPERS PLASE" << endl;
 	cout << "En este juego tomas el papel de un inspector de inmigracion con el objetivo de conseguir dinero y mantener a tu familia feliz"<<endl;
 	system("pause");
@@ -131,7 +137,8 @@ void Game::jugar() {
 	cout << "0.Salir" << endl;
 	cin >> eleccion;
 	do {
-		ff7.stop();
+		opening.stop();
+		niveles.play();
 		if (eleccion == 1) {
 			cout << "Hola cuales es tu nombre?" << endl;
 			cin >> user;
@@ -157,6 +164,7 @@ void Game::jugar() {
 				cout << endl;
 				score += 5;
 				cout << "tu puntaje actual es: " << score << endl;
+				niveles.stop();
 				zelda.play();
 			}
 			else {
@@ -164,12 +172,14 @@ void Game::jugar() {
 				cout << endl;
 				score -= 5;
 				cout << "tu puntaje actual es: " << score << endl;
+				niveles.stop();
 				error.play();
 			}
 
 			cout << "Presiona 2 para avanzar" << endl;
 			cin >> eleccion;
 			system("cls");
+			niveles.play();
 			if (eleccion == 2) {
 				cout << "Nivel 2" << endl;
 				cout << "\tScore " << score << endl;
@@ -192,6 +202,7 @@ void Game::jugar() {
 					cout << endl;
 					score += 5;
 					cout << "tu puntaje actual es: " << score << endl;
+					niveles.stop();
 					zelda2.play();
 				}
 				else {
@@ -199,6 +210,7 @@ void Game::jugar() {
 					cout << endl;
 					score -= 5;
 					cout << "tu puntaje actual es: " << score << endl;
+					niveles.stop();
 					error2.play();
 				}
 			}
@@ -206,6 +218,7 @@ void Game::jugar() {
 			cin >> eleccion;
 			system("cls");
 			if (eleccion == 3) {
+				niveles.play();
 				cout << "Nivel 3" << endl;
 				cout << "\tScore " << score << endl;
 				cout << "Inspector " << user<< ": Hola que tal me permite sus papeles por favor" << endl;
@@ -227,6 +240,7 @@ void Game::jugar() {
 					cout << endl;
 					score += 5;
 					cout << "tu puntaje actual es: " << score << endl;
+					niveles.stop();
 					zelda3.play();
 				}
 				else {
@@ -234,11 +248,14 @@ void Game::jugar() {
 				cout << endl;
 				score -= 5;
 				cout << "tu puntaje actual es: " << score << endl;
+				niveles.stop();
 				error3.play();
 				}
 			}
 			cout << "Presione 4 para continuar" << endl;
 			cin >> eleccion;
+			niveles.stop();
+			nivel4.play();
 			system("cls");
 			if (eleccion == 4) {
 				cout << "Nivel 4" << endl;
@@ -272,18 +289,21 @@ void Game::jugar() {
 					if (N4p == "no") {
 						
 						score += 50;
+						nivel4.stop();
 						cout << "La persona si era terrorista! Tu jefes impresionados por la buena decison tomada te dan un bono (0o0)" << endl;
 						cout << "tu puntaje actual es: " << score << endl;
 						bonusp.play();
 					}
 					else {
 						score -= 50;
+						nivel4.stop();
 						cout << "La persona si era terrorista! Tu jefes decepcionados te miran de mala forma (-_-)" << endl;
 						cout << "tu puntaje actual es: " << score << endl;
 						menosp.play();
 					}
 				}
 				if (N4 == "si") {
+					nivel4.stop();
 					score -= 20;
 					cout << "Si era un terroista! mala suerte, nadie se entero que fuiste tu quine lo dejo pasar" << endl;
 					cout << ", por lo que pudes seguir con tu empleo " << endl;
@@ -291,6 +311,7 @@ void Game::jugar() {
 					error.play();
 				}
 				if (N4 == "no") {
+					nivel4.stop();
 					score += 20;
 					cout << "La persona si era terrorista! buen trabajo en no dejarlo pasar optienes una bonificacion" << endl;
 					cout << "tu puntaje actual es: " << score << endl;
@@ -299,15 +320,17 @@ void Game::jugar() {
 			}
 			cout << "Presione 5 para continuar" << endl;
 			cin >> eleccion;
+			nivel4.stop();
 			bonusp.stop();
 			menosp.stop();
+			niveles.play();
 			system("cls");
 			if (eleccion == 5) {
 				cout << "Nivel 5 (ultimo)" << endl;
 				cout << "\tScore " << score << endl;
 				cout << "Inspector " << user << ": Hola papeles por favor" << endl;
 				cout << endl;
-				cout << "Persona 4: !Claro denme, un momento!" << endl;
+				cout << "Persona 5: !Claro denme, un momento!" << endl;
 				cout << endl;
 				Identificacion p5("", "", "", "", "", "", "", "", "", "");
 				p5.mostrar_datosI5();
@@ -334,6 +357,7 @@ void Game::jugar() {
 			}
 			system("cls");
 			if (score > 0) {
+				niveles.stop();
 				goode.play();
 				cout << "Good ending" << endl;
 				cout << endl;
@@ -341,6 +365,7 @@ void Game::jugar() {
 				cout << endl;
 			}
 			else {
+				niveles.stop();
 				bad.play();
 				cout << "Bad ending" << endl;
 				cout << endl;
